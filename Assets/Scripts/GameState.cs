@@ -147,7 +147,7 @@ public class GameState : MonoBehaviour
                         break;
                     }
 
-                    playerHappiness += 3;
+                    playerHappiness += 6;
                     if (playerHappiness >= 100)
                     {
                         playerHappiness = 100;

@@ -35,6 +35,11 @@ public class UIManager : MonoBehaviour
                     taskTextMesh.text = GameState.Instance.InHappinessCooldown ? "You need to wait before doing that again." : "Press 'E' to watch some TV.";
                     break;
                 case Room.Bedroom:
+                    if (GameState.Instance.playerTiredness >= 50)
+                    {
+                        taskTextMesh.text = "You can only nap once you are below 50% tiredness.";
+                        break;
+                    }
                     taskTextMesh.text = GameState.Instance.InTirednessCooldown ? "You need to wait before doing that again." : "Press 'E' to take a nap.";
                     break;
                 default:
