@@ -16,8 +16,14 @@ public enum Room
 
 public class RoomNotifier : MonoBehaviour
 {
-    public delegate void NewRoomEnteredHandler(Room newRoom);
-    public static NewRoomEnteredHandler OnNewRoomEntered;
+    public delegate void RoomEnteredHandler(Room newRoom);
+    public static RoomEnteredHandler OnRoomEntered;
+
+    public delegate void RoomStayHandler(Room currentRoom);
+    public static RoomStayHandler OnRoomStay;
+
+    public delegate void RoomExitHandler(Room oldRoom);
+    public static RoomExitHandler OnRoomExit;
 
     [SerializeField] Room room;
 
@@ -28,6 +34,26 @@ public class RoomNotifier : MonoBehaviour
             return;
         }
 
-        OnNewRoomEntered?.Invoke(room);
+        OnRoomEntered?.Invoke(room);
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") == false)
+        {
+            return;
+        }
+
+        OnRoomStay?.Invoke(room);
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") == false)
+        {
+            return;
+        }
+
+        OnRoomExit?.Invoke(room);
     }
 }

@@ -1,20 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI roomTextMesh;
+    [SerializeField] TextMeshProUGUI taskTextMesh;
 
     void OnEnable()
     {
-        RoomNotifier.OnNewRoomEntered += OnNewRoomEntered;
+        RoomNotifier.OnRoomEntered += OnNewRoomEntered;
     }
 
     void OnDisable()
     {
-        RoomNotifier.OnNewRoomEntered -= OnNewRoomEntered;
+        RoomNotifier.OnRoomEntered -= OnNewRoomEntered;
+    }
+    
+    void Update()
+    {
+        if (GameState.Instance.IsPlayerInNPCRange == true)
+        {
+            taskTextMesh.text = "Press 'E' to talk to your husband.";
+        }
+        else
+        {
+            switch (GameState.Instance.CurrentRoom)
+            {
+                case Room.Bathroom:
+                case Room.GuestBathroom:
+                    taskTextMesh.text = GameState.Instance.InHygeneCooldown ? "You need to wait before doing that again." : "Press 'E' to wash yourself.";
+                    break;
+                case Room.LivingRoom:
+                    taskTextMesh.text = GameState.Instance.InHappinessCooldown ? "You need to wait before doing that again." : "Press 'E' to watch some TV.";
+                    break;
+                case Room.Bedroom:
+                    taskTextMesh.text = GameState.Instance.InTirednessCooldown ? "You need to wait before doing that again." : "Press 'E' to take a nap.";
+                    break;
+                default:
+                    taskTextMesh.text = "";
+                    break;
+            }
+        }
     }
 
     void OnNewRoomEntered(Room room)
