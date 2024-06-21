@@ -45,15 +45,4 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    void FixedUpdate()
-    {
-
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        //var contact = col.GetContact(0);
-        //_targetPosition = contact.point;
-    }
 }
