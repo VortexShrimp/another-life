@@ -27,7 +27,7 @@ public class ProgressBar : MonoBehaviour
                 scale.x = GameState.Instance.playerHygene / 100f;
                 break;
             case Trait.Happiness:
-                scale.x = GameState.Instance.playerHygene / 100f;
+                scale.x = GameState.Instance.playerHappiness / 100f;
                 break;
         }
 
