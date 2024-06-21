@@ -50,18 +50,36 @@ public class GameState : MonoBehaviour
         if (_tirednessTimer >= _tirednessDecaySeconds)
         {
             playerTiredness -= 1;
+
+            if (playerTiredness <= 0)
+            {
+                playerTiredness = 0;
+            }
+
             _tirednessTimer = 0;
         }
 
         if (_hygeneTimer >= _hygeneDecaySeconds)
         {
             playerHygene -= 1;
+
+            if (playerHygene <= 0)
+            {
+                playerHygene = 0;
+            }
+
             _hygeneTimer = 0;
         }
 
         if (_happinessTimer >= _happinessDecaySeconds)
         {
             playerHappiness -= 1;
+
+            if (playerHappiness <= 0)
+            {
+                playerHappiness = 0;
+            }
+
             _happinessTimer = 0;
         }
     }
